@@ -91,7 +91,8 @@ void EventThread::sendVsyncHintOnLocked() {
 }
 
 void EventThread::onFirstRef() {
-    run("EventThread", PRIORITY_URGENT_DISPLAY + PRIORITY_REALTIME);
+    run("EventThread", PRIORITY_REALTIME);
+    android_set_rt_ioprio(getTid(), 1);
 }
 
 sp<EventThread::Connection> EventThread::createEventConnection() const {
